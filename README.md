@@ -1,6 +1,6 @@
 # LeetCode SQL 50 – Solutions
 
-Solutions for the SQL 50 Study Plan on LeetCode.
+My proposed Solutions for the SQL 50 Study Plan on LeetCode.
 
 ---
 
