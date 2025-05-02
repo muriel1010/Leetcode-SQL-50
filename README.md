@@ -1,1 +1,14 @@
-# Leetcode-SQL-Study-Plan
+# LeetCode SQL 50 – Solutions
+
+Solutions for the SQL 50 Study Plan on LeetCode.
+
+---
+
+## 1757. Recyclable and Low Fat Products  
+🔗 [LeetCode Link](https://leetcode.com/problems/recyclable-and-low-fat-products/)
+
+```sql
+SELECT product_id
+FROM Products
+WHERE low_fats = 'Y'
+  AND recyclable = 'Y';
