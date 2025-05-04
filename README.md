@@ -8,7 +8,13 @@ My proposed Solutions for the SQL 50 Study Plan on LeetCode.
 
 ```sql
 
-  AND recyclable = 'Y';
+  select id 
+from(
+    select id,temperature,
+    lag(temperature)over(order by recordDate asc ) as prev_temp
+    from weather
+)t
+where temperature>prev_temp';
 ```
 
 🔗[197. Rising Temperature](https://leetcode.com/problems/second-highest-salary/description/?envType=study-plan-v2&envId=top-sql-50)
