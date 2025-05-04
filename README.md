@@ -16,8 +16,13 @@ WHERE w1.temperature > w2.temperature;
 
 ```
 
-🔗[197. Rising Temperature](https://leetcode.com/problems/second-highest-salary/description/?envType=study-plan-v2&envId=top-sql-50)
+🔗[176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary/?envType=study-plan-v2&envId=top-sql-50)
 ```sql
-kkkkkkkkkkkkkkk
+SELECT 
+  (SELECT DISTINCT salary 
+   FROM Employee 
+   ORDER BY salary DESC 
+   LIMIT 1 OFFSET 1) AS SecondHighestSalary;
+
 ;
 ```
