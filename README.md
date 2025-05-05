@@ -36,3 +36,13 @@ WHERE id NOT IN (
         GROUP BY email
     ) AS sub
 );
+```
+
+🔗[1581. Customer Who Visited but Did Not Make Any Transactions](https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/description/?envType=study-plan-v2&envId=top-sql-50)
+```sql
+SELECT customer_id,count(*) as count_no_trans
+from Visits V 
+LEFT JOIN Transactions T ON V.visit_id=T.visit_id
+WHERE  T.transaction_id is null
+GROUP BY customer_id;
+```
