@@ -188,28 +188,83 @@ WHERE primary_flag = 'Y'
 
 
 ```
-🔗[]()
+🔗[610. Triangle Judgement](https://leetcode.com/problems/triangle-judgement/description/?envType=study-plan-v2&envId=top-sql-50)
 ```sql
+SELECT x, y, z,
+       CASE 
+           WHEN x + y > z AND x + z > y AND y + z > x THEN 'Yes'
+           ELSE 'No'
+       END AS triangle
+FROM Triangle;
+
+```
+🔗[180. Consecutive Numbers](https://leetcode.com/problems/consecutive-numbers/description/?envType=study-plan-v2&envId=top-sql-50)
+```sql
+SELECT DISTINCT l1.num AS ConsecutiveNums
+FROM Logs l1
+JOIN Logs l2 ON l1.id = l2.id - 1
+JOIN Logs l3 ON l1.id = l3.id - 2
+WHERE l1.num = l2.num AND l2.num = l3.num;
 
 
 ```
-🔗[]()
+🔗[1164. Product Price at a Given Date](https://leetcode.com/problems/product-price-at-a-given-date/description/?envType=study-plan-v2&envId=top-sql-50)
 ```sql
+WITH LatestChange AS (
+  SELECT
+    product_id,
+    new_price,
+    ROW_NUMBER() OVER (PARTITION BY product_id ORDER BY change_date DESC) AS rn
+  FROM Products
+  WHERE change_date <= '2019-08-16'
+),
+AllProducts AS (
+  SELECT DISTINCT product_id FROM Products
+)
+SELECT
+  a.product_id,
+  COALESCE(l.new_price, 10) AS price
+FROM AllProducts a
+LEFT JOIN LatestChange l
+  ON a.product_id = l.product_id AND l.rn = 1;
 
 
 ```
-🔗[]()
+🔗[1204. Last Person to Fit in the Bus](https://leetcode.com/problems/last-person-to-fit-in-the-bus/?envType=study-plan-v2&envId=top-sql-50)
 ```sql
-
+WITH RunningWeight AS (
+  SELECT
+    person_name,
+    turn,
+    SUM(weight) OVER (ORDER BY turn) AS total_weight
+  FROM Queue
+)
+SELECT person_name
+FROM RunningWeight
+WHERE total_weight <= 1000
+ORDER BY total_weight DESC
+LIMIT 1;
 
 ```
-🔗[]()
+🔗[1907. Count Salary Categories](https://leetcode.com/problems/count-salary-categories/?envType=study-plan-v2&envId=top-sql-50)
 ```sql
+SELECT 'Low Salary' AS category, 
+       COUNT(*) AS accounts_count
+FROM Accounts
+WHERE income < 20000
 
+UNION ALL
 
-```
-🔗[]()
-```sql
+SELECT 'Average Salary', 
+       COUNT(*)
+FROM Accounts
+WHERE income BETWEEN 20000 AND 50000
 
+UNION ALL
+
+SELECT 'High Salary', 
+       COUNT(*)
+FROM Accounts
+WHERE income > 50000;
 
 ```
